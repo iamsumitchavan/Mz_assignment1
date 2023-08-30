@@ -1,16 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import WithUser from "../component/WithUser";
 
 function Home({ user, logOut }) {
-  const navigate = useNavigate();
   const handleLogout = async () => {
     try {
       await logOut();
-      navigate("/");
     } catch (error) {
       console.log(error.message);
     }
   };
+
+  if (!user) {
+    return <Navigate to="/" />;
+  }
   return (
     <div>
       <div>
