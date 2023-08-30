@@ -1,8 +1,10 @@
 import Input from "./Input";
 import * as Yup from "yup";
-import { Formik, Form, useFormik, withFormik } from "formik";
+import { withFormik } from "formik";
 import Button from "../component/Button";
 import GoogleButton from "react-google-button";
+import WithUser from "../component/WithUser";
+import { Navigate } from "react-router-dom";
 
 const handleSubmitForm = (values, bag) => {
   console.log(bag);
@@ -28,17 +30,21 @@ function LoginPage({
   handleBlur,
   errors,
   touched,
-  logIn,
   googleSignIn,
+  user,
 }) {
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
     try {
       await googleSignIn();
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
+
+  if (user) {
+    return <Navigate to="/home" />;
+  }
   return (
     <div>
       <div className="flex h-screen justify-center items-center">
@@ -96,4 +102,4 @@ const FormikLogin = withFormik({
   validationSchema: schema,
   handleSubmit: handleSubmitForm,
 })(LoginPage);
-export default FormikLogin;
+export default WithUser(FormikLogin);
