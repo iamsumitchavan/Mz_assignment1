@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 export const UserContext = createContext();
 
 function UserContextProvider({ children }) {
+  console.log("provider called");
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
 

@@ -3,11 +3,11 @@ import { Navigate } from "react-router-dom";
 import WithUser from "../component/WithUser";
 
 const UserRoute = ({ children, user }) => {
-  console.log("Check user in Private: ", user);
+  console.log("userroute si called");
   if (!user) {
     return <Navigate to="/" />;
   }
-  return children;
+  return <div>{children}</div>;
 };
 
 export default WithUser(UserRoute);

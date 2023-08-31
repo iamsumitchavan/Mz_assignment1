@@ -8,6 +8,7 @@ import { VscDebugRestart } from "react-icons/vsc";
 import getTime from "../component/GetTime";
 
 function Home({ user, logOut }) {
+  console.log("home called");
   const { setTime, time, isActive, setIsActive, isActiveTag, setIsActiveTag } =
     useContext(StateContext);
   const handleLogout = async () => {

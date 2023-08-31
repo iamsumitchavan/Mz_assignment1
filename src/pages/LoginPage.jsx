@@ -28,6 +28,7 @@ function LoginPage({
   googleSignIn,
   user,
 }) {
+  console.log("login called");
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
     try {
@@ -36,10 +37,10 @@ function LoginPage({
       console.log(error);
     }
   };
+
   if (user) {
     return <Navigate to="/home" />;
   }
-
   return (
     <div>
       <div className="flex h-screen justify-center items-center">
