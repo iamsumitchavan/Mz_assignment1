@@ -1,11 +1,9 @@
-import { useContext } from "react";
-import WithUser from "../component/WithUser";
+import React from "react";
 import { Navigate } from "react-router-dom";
-import { UserContext } from "../Context/UserContextProvider";
+import WithUser from "../component/WithUser";
 
-const UserRoute = ({ children }) => {
-  console.log("userroute children ", children);
-  const { user } = useContext(UserContext);
+const UserRoute = ({ children, user }) => {
+  console.log("Check user in Private: ", user);
   if (!user) {
     return <Navigate to="/" />;
   }

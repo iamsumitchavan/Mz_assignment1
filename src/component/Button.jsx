@@ -1,4 +1,4 @@
-function Button({ onSubmit }) {
+function Button({ onSubmit, title }) {
   return (
     <div>
       <div>
@@ -6,7 +6,7 @@ function Button({ onSubmit }) {
           type="submit"
           className="min-w-full py-1 bg-black text-white rounded-sm"
         >
-          Login
+          {title}
         </button>
       </div>
     </div>

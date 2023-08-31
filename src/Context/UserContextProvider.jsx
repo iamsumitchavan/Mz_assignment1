@@ -10,11 +10,16 @@ import {
 } from "firebase/auth";
 
 import { useState, useEffect } from "react";
+import Loading from "../component/Loading";
+import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext();
 
 function UserContextProvider({ children }) {
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
@@ -33,6 +38,7 @@ function UserContextProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
       setUser(currentuser);
+      setLoading(false);
     });
 
     return () => {
@@ -40,10 +46,14 @@ function UserContextProvider({ children }) {
     };
   }, []);
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div>
       <UserContext.Provider
-        value={{ user, logIn, googleSignIn, logOut, signUp }}
+        value={{ user, logIn, googleSignIn, logOut, signUp, navigate }}
       >
         {children}
       </UserContext.Provider>

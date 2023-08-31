@@ -2,12 +2,12 @@ import { memo } from "react";
 function Input({ label, id, name, onBlur, onChange, error, touched, ...rest }) {
   return (
     <div>
-      <div>
+      <div className="">
         <label className="sr-only" htmlFor={id}>
           {label}
         </label>
         <input
-          className="cursor-pointer shadow rounded-sm appearance-none focus:bg-white focus:outline-none border-2  w-72  py-2  px-3 text-gray-700 leading-tight focus:border-purple-500"
+          className="cursor-pointer shadow rounded-sm appearance-none bg-white focus:outline-none border-2  w-96  py-2   text-gray-700 leading-tight focus:border-purple-500"
           name={name}
           id={id}
           onBlur={onBlur}

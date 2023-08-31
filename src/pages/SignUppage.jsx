@@ -8,49 +8,34 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { schema } from "../component/ValidationSchema";
 import { inititalValues } from "../component/ValidationSchema";
-import { FcGoogle } from "react-icons/fc";
 
-const handleSubmitForm = async (values, bag) => {
+const handleSubmitSignUpForm = async (values, bag) => {
+  console.log(bag);
   try {
-    await bag.props.logIn(values.email, values.password);
-    bag.props.navigate("/home");
+    await bag.props.signUp(values.email, values.password);
+    bag.props.navigate("/");
   } catch (err) {
-    console.log("err", err);
+    console.log(err.message);
   }
 };
 
-function LoginPage({
+function SignUppage({
   handleSubmit,
   handleChange,
   handleBlur,
   errors,
   touched,
-  googleSignIn,
-  user,
 }) {
-  const handleGoogleSignIn = async (e) => {
-    e.preventDefault();
-    try {
-      await googleSignIn();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  if (user) {
-    return <Navigate to="/home" />;
-  }
-
   return (
     <div>
       <div className="flex h-screen justify-center items-center">
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col pb-8 px-20 shadow-2xl "
+          className="flex flex-col px-20 shadow-2xl "
         >
-          <div className="py-8">
+          <div className="py-7">
             <h1 className="text-5xl font-extrabold font-sans text-green-700 ">
-              {" "}
-              Login Now
+              Make Account
             </h1>
           </div>
           <div>
@@ -59,7 +44,7 @@ function LoginPage({
               type="email"
               name="email"
               autoComplete="email"
-              placeholder="Enter Email"
+              placeholder="email"
               id="email"
               onBlur={handleBlur}
               onChange={handleChange}
@@ -73,7 +58,7 @@ function LoginPage({
               type="password"
               name="password"
               autoComplete="password"
-              placeholder="Enter Password"
+              placeholder="password"
               id="password"
               onBlur={handleBlur}
               onChange={handleChange}
@@ -81,30 +66,17 @@ function LoginPage({
               touched={touched.password}
             />
           </div>
-          <div className="py-2 flex flex-col gap-2">
+          <div className="py-5 flex flex-col gap-2">
             <div>
-              <Button title="log in" />
+              <Button title="sign up" />
             </div>
 
-            <div className="mb-5">
-              <button
-                onClick={googleSignIn}
-                className=" w-96 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150"
-              >
-                <div className="flex justify-center w-full gap-4">
-                  <FcGoogle className="text-2xl" />
-                  <span className="font-sans text-lg font-bold">
-                    Login with Google
-                  </span>
-                </div>
-              </button>
-            </div>
-            <div>
+            <div className="pb-5 py-4">
               <span className="font-mono text-indigo-500 text-lg ">
-                dont have an account ?
-              </span>{" "}
+                Already have an account ?
+              </span>
               <Link
-                to="/signup"
+                to="/"
                 className="text-xl   font-bold underline text-indigo-600"
               >
                 click here
@@ -117,9 +89,9 @@ function LoginPage({
   );
 }
 
-const FormikLogin = withFormik({
+const FormikSign = withFormik({
   inititalValues: inititalValues,
   validationSchema: schema,
-  handleSubmit: handleSubmitForm,
-})(LoginPage);
-export default WithUser(FormikLogin);
+  handleSubmit: handleSubmitSignUpForm,
+})(SignUppage);
+export default WithUser(FormikSign);
