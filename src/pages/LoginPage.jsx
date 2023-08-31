@@ -88,7 +88,7 @@ function LoginPage({
 
             <div className="mb-5">
               <button
-                onClick={googleSignIn}
+                onClick={handleGoogleSignIn}
                 className=" w-96 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150"
               >
                 <div className="flex justify-center w-full gap-4">
